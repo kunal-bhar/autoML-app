@@ -129,7 +129,7 @@ st.write("""
 with st.sidebar.header('1. Upload Data'):
   uploaded_file= st.sidebar.file_uploader('Upload your input CSV file', type=['csv'])
   st.sidebar.markdown("""
-  [Example CSV input file](https://raw.githubusercontent.com/kunal-bhar/automl/main/delaney_solubility_with_descriptors.csv)
+  [Example CSV input file](https://raw.githubusercontent.com/kunal-bhar/autoML-app/main/delaney_solubility_with_descriptors.csv)
                       """)
   
   
