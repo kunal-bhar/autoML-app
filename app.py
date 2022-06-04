@@ -11,11 +11,11 @@ import base64
 import io
 
 # Layout
-st.set_page_config(page_title= 'ML Workflows Automated in seconds', layout= 'wide')
+st.set_page_config(page_title= 'Automating Machine Learning', layout= 'wide')
 
 # Model Building
 def build_model(df):
-  X= df.iloc[:, :, -1] 
+  X= df.iloc[:, :-1] 
   Y= df.iloc[:, -1]
   
   st.markdown('**1.2 Dataset Shape')
@@ -32,7 +32,7 @@ def build_model(df):
   
   X_train, X_test, Y_train, Y_test= train_test_split(X, Y, test_size= split_size, random_state= seed_number)
   reg= LazyRegressor(verbose= 0, ignore_warnings= False, custom_metric= None)
-  models_train, predictions_train= reg.fit(X_train, Y_train, X_test, Y_test)
+  models_train, predictions_train= reg.fit(X_train, X_train, Y_train, Y_train)
   models_test, predictions_test= reg.fit(X_train, X_test, Y_train, Y_test)
   
   st.subheader('2. Model Metrics')
@@ -45,7 +45,7 @@ def build_model(df):
   st.write(predictions_test)
   st.markdown(filedownload(predictions_test, 'test.csv'), unsafe_allow_html= True)
   
-  st.subheader('3. Plot of Model Performance (Test Set)')
+  st.subheader('3. Plots @ Model Performance')
   
   with st.markdown('**R-squared**'):
     
@@ -119,14 +119,17 @@ def imagedownload(plt, filename):
   return href
 
 
-st.write("""     
+st.write("""
+         # AutoML Web Application
+         
+         Input a dataset and discover the best Supervised Learning Algorithm for your use case!      
          """)
 
 
-with st.sidebar.header('1. Upload your CSV Data'):
+with st.sidebar.header('1. Upload Data'):
   uploaded_file= st.sidebar.file_uploader('Upload your input CSV file', type=['csv'])
   st.sidebar.markdown("""
-  [Example CSV input file](https://raw.githubusercontent.com/dataprofessor/data/master/delaney_solubility_with_descriptors.csv)
+  [Example CSV input file](https://raw.githubusercontent.com/kunal-bhar/automl/main/delaney_solubility_with_descriptors.csv)
                       """)
   
   
@@ -139,11 +142,11 @@ st.subheader('1. Dataset')
 
 if uploaded_file is not None:
   df= pd.read_csv(uploaded_file)
-  st.markdown('**1.1 Peek at the Dataset**')
+  st.markdown('**1.1 DataFrame Peek**')
   st.write(df)
   build_model(df)
 else:
-  st.info('Use the sidebar to upload CSV files!')
+  st.info('Use the sidebar to upload CSV files.')
   if st.button('Use Example Dataset instead'):
     
     # Boston Housing Data
