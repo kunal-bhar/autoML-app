@@ -122,9 +122,9 @@ def imagedownload(plt, filename):
 st.write("""
          # Automated Machine Learning~ AutoML
          
-         ### Input your data and evaluate the best Supervised Learning Algorithms for common use cases!   
+         ##### Input your data and evaluate the best Supervised Learning Algorithms for common use cases!   
          
-         ### 📝: Large datasets require a couple of minutes to build on.  
+         ##### 📝: Large datasets require a couple of minutes to build on.  
          """)
 
 
