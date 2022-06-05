@@ -19,9 +19,9 @@ def build_model(df):
   Y= df.iloc[:, -1]
   
   st.markdown('**1.2 Shape**')
-  st.write('Independent Variables aka/ X')
+  st.write('Independent Variables @/ X')
   st.info(X.shape)
-  st.write('Dependent Variable aka/ Y')
+  st.write('Dependent Variable @/ Y')
   st.info(Y.shape)
   
   st.markdown('**1.3 Variables**')
@@ -51,61 +51,61 @@ def build_model(df):
     
     # Portrait Plot
     predictions_test['R-Squared']= [0 if i< 0 else i for i in predictions_test['R-Squared']]
-    plt.figure(figsize= (3, 9))
+    plt.figure(figsize= (3, 7.5))
     sns.set_theme(style= 'whitegrid')
     ax1= sns.barplot(y= predictions_test.index, x= 'R-Squared', data= predictions_test)
     ax1.set(xlim= (0, 1))
-  st.markdown(imagedownload(plt, 'R^2 Plot [Portrait]'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'R^2 Plot~ Portrait'), unsafe_allow_html= True)
   
     # Landscape Plot
-  plt.figure(figsize= (9, 3))
+  plt.figure(figsize= (7.5, 3))
   sns.set_theme(style= 'whitegrid')
   ax1= sns.barplot(x= predictions_test.index, y= 'R-Squared', data= predictions_test)
   ax1.set(ylim= (0, 1))
   plt.xticks(rotation= 90)
   st.pyplot(plt)
-  st.markdown(imagedownload(plt, 'R^2 Plot [Landscape]'), unsafe_allow_html= True) 
+  st.markdown(imagedownload(plt, 'R^2 Plot~ Landscape'), unsafe_allow_html= True) 
     
   with st.markdown('**Root Mean Squared Error**'):
     
     # Portrait Plot
     predictions_test['RMSE']= [50 if i> 50 else i for i in predictions_test['RMSE']]
-    plt.figure(figsize= (3, 9))
+    plt.figure(figsize= (3, 7.5))
     sns.set_theme(style= 'whitegrid')
     ax2= sns.barplot(y= predictions_test.index, x= 'RMSE', data= predictions_test)
-  st.markdown(imagedownload(plt, 'RMSE Plot [Portrait]'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'RMSE Plot~ Portrait'), unsafe_allow_html= True)
   
     # Landscape Plot
-  plt.figure(figsize= (9, 3))
+  plt.figure(figsize= (7.5, 3))
   sns.set_theme(style= 'whitegrid')
   ax2= sns.barplot(x= predictions_test.index, y='RMSE', data= predictions_test)
   plt.xticks(rotation= 90)
   st.pyplot(plt)
-  st.markdown(imagedownload(plt, 'RMSE Plot [Landscape]'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'RMSE Plot~ Landscape'), unsafe_allow_html= True)
   
   with st.markdown('**Processing Time**'):
     
     # Portrait Plot
     predictions_test['Time Taken']= [0 if i< 0 else i for i in predictions_test['Time Taken']]
-    plt.figure(figsize= (3, 9))
+    plt.figure(figsize= (3, 7.5))
     sns.set_theme(style= 'whitegrid')
     ax3= sns.barplot(y= predictions_test.index, x= 'Time Taken', data= predictions_test)
-  st.markdown(imagedownload(plt, 'Processing-Time Plot [Portrait]'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'Processing-Time Plot~ Portrait'), unsafe_allow_html= True)
   
     # Landscape Plot
-  plt.figure(figsize= (9, 3))
+  plt.figure(figsize= (7.5, 3))
   sns.set_theme(style= 'whitegrid')
   ax3= sns.barplot(x= predictions_test.index, y= 'Time Taken', data= predictions_test)  
   plt.xticks(rotation= 90)
   st.pyplot(plt)
-  st.markdown(imagedownload(plt, 'Processing-Time Plot [Landscape]'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'Processing-Time Plot~ Landscape'), unsafe_allow_html= True)
 
   
 # Download data as CSV
 def filedownload(df, filename):
   csv= df.to_csv(index= False)
   b64= base64.b64encode(csv.encode()).decode() # string <-> byte conversion
-  href= f'<a href="data:file/csv;base64,{b64}" download= {filename}>Download {filename} </a>'
+  href= f'<a href="data:file/csv;base64,{b64}" download= {filename}>Download {filename}. </a>'
   return href
 
 
@@ -115,16 +115,16 @@ def imagedownload(plt, filename):
   plt.savefig(s, format= 'pdf', bbox_inches= 'tight')
   plt.close()
   b64= base64.b64encode(s.getvalue()).decode() # string <-> byte conversion
-  href= f'<a href="data:image/png;base64,{b64}" download= {filename}>Download {filename} </a>'
+  href= f'<a href="data:image/png;base64,{b64}" download= {filename}>Download {filename}. </a>'
   return href
 
 
 st.write("""
          # Automated Machine Learning~ AutoML
          
-         Input a dataset and discover the best Supervised Learning Algorithm for your use case!   
+         ### Input your data and evaluate the best Supervised Learning Algorithms for common use cases!   
          
-         📝: Large datasets require a couple of minutes to build on.  
+         ### 📝: Large datasets require a couple of minutes to build on.  
          """)
 
 
@@ -153,11 +153,11 @@ else:
     
     # Boston Housing Data
     boston= load_boston()
-    X= pd.DataFrame(boston.data, columns= boston.feature_names).loc[:250]
-    Y= pd.Series(boston.target, name= 'response').loc[:250]
+    X= pd.DataFrame(boston.data, columns= boston.feature_names).loc[:252]
+    Y= pd.Series(boston.target, name= 'response').loc[:252]
     df= pd.concat([X, Y], axis= 1)
     
-    st.markdown('The Boston Housing Dataset is used as an example.')
+    st.markdown('One half of the [Boston Housing Dataset](https://www.kaggle.com/code/prasadperera/the-boston-housing-dataset/data) is used as an example.')
     st.write(df.head(5)) 
     
     build_model(df)
