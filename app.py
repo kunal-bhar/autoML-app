@@ -55,7 +55,7 @@ def build_model(df):
     sns.set_theme(style= 'whitegrid')
     ax1= sns.barplot(y= predictions_test.index, x= 'R-Squared', data= predictions_test)
     ax1.set(xlim= (0, 1))
-  st.markdown(imagedownload(plt, 'R^2 Plot~ Portrait'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'R^2 Plot - Portrait'), unsafe_allow_html= True)
   
     # Landscape Plot
   plt.figure(figsize= (7.5, 3))
@@ -64,7 +64,7 @@ def build_model(df):
   ax1.set(ylim= (0, 1))
   plt.xticks(rotation= 90)
   st.pyplot(plt)
-  st.markdown(imagedownload(plt, 'R^2 Plot~ Landscape'), unsafe_allow_html= True) 
+  st.markdown(imagedownload(plt, 'R^2 Plot - Landscape'), unsafe_allow_html= True) 
     
   with st.markdown('**Root Mean Squared Error**'):
     
@@ -73,7 +73,7 @@ def build_model(df):
     plt.figure(figsize= (3, 7.5))
     sns.set_theme(style= 'whitegrid')
     ax2= sns.barplot(y= predictions_test.index, x= 'RMSE', data= predictions_test)
-  st.markdown(imagedownload(plt, 'RMSE Plot~ Portrait'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'RMSE Plot - Portrait'), unsafe_allow_html= True)
   
     # Landscape Plot
   plt.figure(figsize= (7.5, 3))
@@ -81,7 +81,7 @@ def build_model(df):
   ax2= sns.barplot(x= predictions_test.index, y='RMSE', data= predictions_test)
   plt.xticks(rotation= 90)
   st.pyplot(plt)
-  st.markdown(imagedownload(plt, 'RMSE Plot~ Landscape'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'RMSE Plot - Landscape'), unsafe_allow_html= True)
   
   with st.markdown('**Processing Time**'):
     
@@ -90,7 +90,7 @@ def build_model(df):
     plt.figure(figsize= (3, 7.5))
     sns.set_theme(style= 'whitegrid')
     ax3= sns.barplot(y= predictions_test.index, x= 'Time Taken', data= predictions_test)
-  st.markdown(imagedownload(plt, 'Processing-Time Plot~ Portrait'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'Processing-Time Plot - Portrait'), unsafe_allow_html= True)
   
     # Landscape Plot
   plt.figure(figsize= (7.5, 3))
@@ -98,7 +98,7 @@ def build_model(df):
   ax3= sns.barplot(x= predictions_test.index, y= 'Time Taken', data= predictions_test)  
   plt.xticks(rotation= 90)
   st.pyplot(plt)
-  st.markdown(imagedownload(plt, 'Processing-Time Plot~ Landscape'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'Processing-Time Plot - Landscape'), unsafe_allow_html= True)
 
   
 # Download data as CSV
@@ -122,16 +122,16 @@ def imagedownload(plt, filename):
 st.write("""
          # Automated Machine Learning~ AutoML
          
-         ##### Input your data and evaluate the best Supervised Learning Algorithms for common use cases!   
+         ###### Input your data and select the best Supervised Learning Algorithms for desired use cases!   
          
-         ##### 📝: Large datasets require a couple of minutes to build on.  
+         ###### Note 📝: Large datasets require a couple of minutes to build on.  
          """)
 
 
 with st.sidebar.header('1. Upload Data'):
-  uploaded_file= st.sidebar.file_uploader('Upload your input CSV file', type=['csv'])
+  uploaded_file= st.sidebar.file_uploader('Upload your data as a Comma Separated Values (CSV) file.', type=['csv'])
   st.sidebar.markdown("""
-  [Example CSV input file](https://raw.githubusercontent.com/kunal-bhar/autoML-app/main/delaney_solubility_with_descriptors.csv)
+  [Sample Input File](https://raw.githubusercontent.com/kunal-bhar/autoML-app/main/delaney_solubility_with_descriptors.csv)
                       """)
   
   
@@ -149,7 +149,7 @@ if uploaded_file is not None:
   build_model(df)
 else:
   st.info('Use the sidebar to upload CSV files.')
-  if st.button('Example Input File'):
+  if st.button('Try on an Example Dataset'):
     
     # Boston Housing Data
     boston= load_boston()
@@ -157,6 +157,7 @@ else:
     Y= pd.Series(boston.target, name= 'response').loc[:252]
     df= pd.concat([X, Y], axis= 1)
     
+    st.markdown('**1.1 Peek**')
     st.markdown('One half of the [Boston Housing Dataset](https://www.kaggle.com/code/prasadperera/the-boston-housing-dataset/data) is used as an example.')
     st.write(df.head(5)) 
     
