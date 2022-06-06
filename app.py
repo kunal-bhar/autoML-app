@@ -120,11 +120,15 @@ def imagedownload(plt, filename):
 
 
 st.write("""
-         # Automated Machine Learning~ AutoML
+         # AutoML~ Automated Machine Learning
          
-         ###### Input your data and select the best Supervised Learning Algorithms for desired use cases!   
+         ###### Input a data file and select Algorithms that are best-suited to your Supervised Machine Learning model!           
+                 
+         ###### 📝:  The scope of this project is a work in progress to also include classifier models.
+          
+         ###### 📝:  Large datasets typically require about five minutes to build on.
          
-         ###### Note 📝: Large datasets require a couple of minutes to build on.  
+         ###### 📝:  View this project on [Github](https://github.com/kunal-bhar/autoML-app).
          """)
 
 
@@ -137,7 +141,7 @@ with st.sidebar.header('1. Upload Data'):
   
 with st.sidebar.header('2. Set Parameters'):
   split_size= st.sidebar.slider('Select Training Set Size (%)', 10, 90, 80, 5)
-  seed_number= st.sidebar.slider('Set Random Seed Number', 1, 100, 42, 1)
+  seed_number= st.sidebar.slider('Set Random Seed Number', 1, 100, 33, 1)
     
 
 st.subheader('1. Dataset')
