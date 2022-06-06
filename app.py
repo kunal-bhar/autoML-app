@@ -39,11 +39,11 @@ def build_model(df):
   
   st.write('Training Set')
   st.write(predictions_train)
-  st.markdown(filedownload(predictions_train, 'Training Metrics'), unsafe_allow_html= True)
+  st.markdown(filedownload(predictions_train, 'Training-Metrics.csv'), unsafe_allow_html= True)
   
   st.write('Test Set')
   st.write(predictions_test)
-  st.markdown(filedownload(predictions_test, 'Test Metrics'), unsafe_allow_html= True)
+  st.markdown(filedownload(predictions_test, 'Test-Metrics.csv'), unsafe_allow_html= True)
   
   st.subheader('3. Plots @ Model Performance')
   
@@ -55,7 +55,7 @@ def build_model(df):
     sns.set_theme(style= 'whitegrid')
     ax1= sns.barplot(y= predictions_test.index, x= 'R-Squared', data= predictions_test)
     ax1.set(xlim= (0, 1))
-  st.markdown(imagedownload(plt, 'R^2 Plot - Portrait'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'R^2-Plot-Portrait.pdf'), unsafe_allow_html= True)
   
     # Landscape Plot
   plt.figure(figsize= (7.5, 3))
@@ -64,7 +64,7 @@ def build_model(df):
   ax1.set(ylim= (0, 1))
   plt.xticks(rotation= 90)
   st.pyplot(plt)
-  st.markdown(imagedownload(plt, 'R^2 Plot - Landscape'), unsafe_allow_html= True) 
+  st.markdown(imagedownload(plt, 'R^2-Plot-Landscape.pdf'), unsafe_allow_html= True) 
     
   with st.markdown('**Root Mean Squared Error**'):
     
@@ -73,7 +73,7 @@ def build_model(df):
     plt.figure(figsize= (3, 7.5))
     sns.set_theme(style= 'whitegrid')
     ax2= sns.barplot(y= predictions_test.index, x= 'RMSE', data= predictions_test)
-  st.markdown(imagedownload(plt, 'RMSE Plot - Portrait'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'RMSE-Plot-Portrait.pdf'), unsafe_allow_html= True)
   
     # Landscape Plot
   plt.figure(figsize= (7.5, 3))
@@ -81,7 +81,7 @@ def build_model(df):
   ax2= sns.barplot(x= predictions_test.index, y='RMSE', data= predictions_test)
   plt.xticks(rotation= 90)
   st.pyplot(plt)
-  st.markdown(imagedownload(plt, 'RMSE Plot - Landscape'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'RMSE-Plot-Landscape.pdf'), unsafe_allow_html= True)
   
   with st.markdown('**Processing Time**'):
     
@@ -90,7 +90,7 @@ def build_model(df):
     plt.figure(figsize= (3, 7.5))
     sns.set_theme(style= 'whitegrid')
     ax3= sns.barplot(y= predictions_test.index, x= 'Time Taken', data= predictions_test)
-  st.markdown(imagedownload(plt, 'Processing-Time Plot - Portrait'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'Processing-Time Plot-Portrait.pdf'), unsafe_allow_html= True)
   
     # Landscape Plot
   plt.figure(figsize= (7.5, 3))
@@ -98,14 +98,14 @@ def build_model(df):
   ax3= sns.barplot(x= predictions_test.index, y= 'Time Taken', data= predictions_test)  
   plt.xticks(rotation= 90)
   st.pyplot(plt)
-  st.markdown(imagedownload(plt, 'Processing-Time Plot - Landscape'), unsafe_allow_html= True)
+  st.markdown(imagedownload(plt, 'Processing-Time-Plot-Landscape.pdf'), unsafe_allow_html= True)
 
   
 # Download data as CSV
 def filedownload(df, filename):
   csv= df.to_csv(index= False)
   b64= base64.b64encode(csv.encode()).decode() # string <-> byte conversion
-  href= f'<a href="data:file/csv;base64,{b64}" download= {filename}>Download {filename}. </a>'
+  href= f'<a href="data:file/csv;base64,{b64}" download= {filename}>Download {filename} </a>'
   return href
 
 
@@ -115,7 +115,7 @@ def imagedownload(plt, filename):
   plt.savefig(s, format= 'pdf', bbox_inches= 'tight')
   plt.close()
   b64= base64.b64encode(s.getvalue()).decode() # string <-> byte conversion
-  href= f'<a href="data:image/png;base64,{b64}" download= {filename}>Download {filename}. </a>'
+  href= f'<a href="data:image/png;base64,{b64}" download= {filename}>Download {filename} </a>'
   return href
 
 
